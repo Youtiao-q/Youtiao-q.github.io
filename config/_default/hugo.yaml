@@ -4,7 +4,7 @@
 # This file is formatted using YAML syntax - learn more at https://learnxinyminutes.com/docs/yaml/
 
 title: “AI花椒”人工智能创新团队 # Website name
-baseURL: 'https://github.com/Youtiao-q/Youtiao-q.github.io' # Website URL
+baseURL: 'https://youtiao-q.github.io/' # Website URL
 
 ############################
 ## LANGUAGE
