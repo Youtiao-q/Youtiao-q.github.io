@@ -1,0 +1,97 @@
+{{/* Gallery Shortcode for Hugo Blox Builder with layout and page bundle support. */}}
+{{/* Load gallery images from page bundle or media library. */}}
+{{/* Modified version with single column layout and page bundle support */}}
+
+{{/*
+    Docs: https://docs.hugoblox.com/content/writing-markdown-latex/#image-gallery
+
+    Parameters
+    ----------
+    album : default "gallery"
+        Album folder. If image resources are in page bundle, this is the subfolder name in the page bundle.
+        If not, it's the folder in `assets/media/albums/` to load images from.
+    page_bundle : default false
+        Whether to load images from page bundle (true) or media library (false).
+        If true, images are loaded from a subfolder in the current page's bundle.
+    order : default "asc"
+        Sort images by title ascending (asc) or descending (desc).
+    resize_options : default "750x750"
+        Resize options passed to Hugo `.Fit` function (https://gohugo.io/content-management/image-processing/).
+    layout : default "grid"
+        Layout type: "grid" for grid layout or "single" for single column (each image on a row)
+*/}}
+
+{{/* For gallery nested in landing page sections */}}
+{{ $.Page.Store.Set "has_gallery" true }}
+
+{{/* Gallery parameters */}}
+{{ $album := (.Get "album") | default "gallery" }}
+{{ $use_page_bundle := .Get "page_bundle" | default false }}
+{{ $sort_order := .Get "order" | default "asc" }}
+{{ $resize_options := printf "%s webp" (.Get "resize_options" | default "750x750") }}
+{{ $layout := (.Get "layout") | default "grid" }}
+
+{{ if eq $layout "single" }}
+  <div class="gallery-single">
+{{ else }}
+  <div class="gallery-grid">
+{{ end }}
+
+  {{/* Load images from page bundle or media library */}}
+  {{ $images := slice }}
+  {{ if $use_page_bundle }}
+    {{/* Load images from page bundle subfolder */}}
+    {{ $page_album_path := path.Join $album "*" }}
+    {{ $images = $.Page.Resources.Match $page_album_path }}
+  {{ else }}
+    {{/* Load images from media library */}}
+    {{ $media_album_path := path.Join "media" "albums" $album "*" }}
+    {{ $images = resources.Match $media_album_path }}
+  {{ end }}
+
+  {{ range (sort $images "Name" $sort_order) }}
+    {{ $image := .Fit $resize_options }}
+    {{/* Check if the user set a caption for this image */}}
+    {{ $filename := path.Base .Name }}
+    {{ $caption := "" }}
+    {{ if $.Page.Params.gallery_item }}
+      {{ range (where (where $.Page.Params.gallery_item "album" $album) "image" $filename) }}
+        {{ $caption = .caption }}
+      {{ end }}
+    {{ end }}
+    
+    {{ if eq $layout "single" }}
+      {{/* Single column layout - each image on its own row */}}
+      <div class="gallery-item--single">
+        <a data-fancybox="gallery-{{$album}}" href="{{ .RelPermalink }}" {{ with $caption }}data-caption="{{.|markdownify|emojify|safeHTMLAttr}}"{{ end }}>
+          <img src="{{ $image.RelPermalink }}" loading="lazy" alt="{{ plainify $caption | default $filename }}" width="{{ $image.Width }}" height="{{ $image.Height }}" style="width: 100%; height: auto;">
+        </a>
+        {{ with $caption }}
+          <p class="gallery-caption">{{ . | markdownify | emojify }}</p>
+        {{ end }}
+      </div>
+    {{ else }}
+      {{/* Grid layout */}}
+      {{ $image_size := "gallery-item--medium" }}
+      {{if in .Name "-f." }}
+        {{ $image_size = "gallery-item--full" }}
+      {{else if in .Name "-s." }}
+        {{ $image_size = "" }}
+      {{else if in .Name "-l." }}
+        {{ $image_size = "gallery-item--large" }}
+      {{end}}
+      <div class="gallery-item {{$image_size}}">
+        <a data-fancybox="gallery-{{$album}}" href="{{ .RelPermalink }}" {{ with $caption }}data-caption="{{.|markdownify|emojify|safeHTMLAttr}}"{{ end }}>
+          <img src="{{ $image.RelPermalink }}" loading="lazy" alt="{{ plainify $caption | default $filename }}" width="{{ $image.Width }}" height="{{ $image.Height }}">
+        </a>
+      </div>
+    {{ end }}
+  {{else}}
+    {{ if $use_page_bundle }}
+      {{ errorf "Unable to load gallery `%s` from page bundle in `%s`." (path.Join $album "*") .Page.File.Filename }}
+    {{ else }}
+      {{ errorf "Unable to load gallery `%s` from media library in `%s`." (path.Join "media" "albums" $album "*") .Page.File.Filename }}
+    {{ end }}
+  {{end}}
+
+</div>

@@ -1,48 +1,48 @@
 ---
-title: Contact
-date: 2022-10-24
+title: 联系方式
+date: 2026-01-12
 
 type: landing
 
 sections:
   - block: contact
     content:
-      title: Contact
+      title: 联系我们
       text: |-
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer tempus augue non tempor egestas. Proin nisl nunc, dignissim in accumsan dapibus, auctor ullamcorper neque. Quisque at elit felis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aenean eget elementum odio. Cras interdum eget risus sit amet aliquet. In volutpat, nisl ut fringilla dignissim, arcu nisl suscipit ante, at accumsan sapien nisl eu eros.
-      email: test@example.org
-      phone: 888 888 88 88
+        欢迎联系我们！我们的研究团队专注于前沿技术研究，如有任何问题或合作意向，请随时与我们联系。
+      email: xionghanqing@ecjtu.edu.cn
+      phone: 138 8888 8888
       address:
-        street: 450 Serra Mall
-        city: Stanford
-        region: CA
-        postcode: '94305'
-        country: United States
-        country_code: US
+        street: 江西省南昌市青山湖区双港东大街808号
+        city: 南昌市
+        region: 青山湖区
+        postcode: '330013'
+        country: 中国
+        country_code: CN
       coordinates:
-        latitude: '37.4275'
-        longitude: '-122.1697'
-      directions: Enter Building 1 and take the stairs to Office 200 on Floor 2
+        latitude: '28.7509175'
+        longitude: '115.8669716'
+      directions: 乘坐地铁1号线到双港站，2号口出，步行约800米即到；或乘坐210路、223路、232路公交车到华东交通大学站
       office_hours:
-        - 'Monday 10:00 to 13:00'
-        - 'Wednesday 09:00 to 10:00'
-      appointment_url: 'https://calendly.com'
+        - '周一 09:00 至 17:00'
+        - '周五 09:00 至 17:00'
+      # appointment_url: 'https://calendly.com' # 预约链接
       #contact_links:
       #  - icon: comments
       #    icon_pack: fas
-      #    name: Discuss on Forum
+      #    name: 在论坛讨论
       #    link: 'https://discourse.gohugo.io'
     
-      # Automatically link email and phone or display as text?
+      # 自动链接邮箱和电话，或显示为纯文本？
       autolink: true
     
-      # Email form provider
+      # 邮箱表单提供商 - 隐藏表单
       form:
-        provider: netlify
+        provider: 
         formspree:
           id:
         netlify:
-          # Enable CAPTCHA challenge to reduce spam?
+          # 启用验证码挑战以减少垃圾邮件？
           captcha: false
     design:
       columns: '1'

@@ -1,0 +1,18 @@
+{{/* Function to get website icon image. */}}
+{{/* Input: size (int) */}}
+{{/* Output: resource (obj) */}}
+
+{{ $icon := resources.GetMatch "media/icon.png" }}
+{{ if not $icon }}
+  {{ $icon = resources.GetMatch "media/icon.jpg" }}
+{{ end }}
+{{ if not $icon }}
+  {{ $icon = resources.GetMatch "media/icon.svg" }}
+{{ end }}
+
+{{ $icon_resized := $icon }}
+{{ if and $icon (ne $icon.MediaType.SubType "svg") }}
+  {{ $icon_resized = $icon.Fill (printf "%sx%s Center" (string .) (string .)) }}
+{{ end }}
+
+{{ return $icon_resized }}

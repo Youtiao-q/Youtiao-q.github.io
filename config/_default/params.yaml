@@ -43,21 +43,21 @@ header:
 
 # Site footer
 
-footer:
-  copyright:
-    notice: '© {year} Me. This work is licensed under {license}'
-    license:
-      enable: true
-      allow_derivatives: false
-      share_alike: true
-      allow_commercial: false
+# footer:
+#   copyright:
+#     notice: '© {year} Me. This work is licensed under {license}'
+#     license:
+#       enable: true
+#       allow_derivatives: false
+#       share_alike: true
+#       allow_commercial: false
 
 # Localization
 
-locale:
-  date_format: 'Jan 2, 2006'
-  time_format: '3:04 PM'
-  address_format: en-us
+# locale:
+#   date_format: 'Jan 2, 2006'
+#   time_format: '3:04 PM'
+#   address_format: en-us
 
 # Site features
 
@@ -110,6 +110,10 @@ extensions:
     local_backend: false
   academicons:
     enable: true
+
+# Power Ups
+power_ups:
+  hide_published_with: true
 
 # Citation style
 
