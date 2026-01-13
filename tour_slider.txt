@@ -1,0 +1,41 @@
+﻿<div class="carousel-inner">
+  
+
+    
+    
+
+    
+
+    
+    
+      
+    
+
+    
+
+    
+      
+      
+        
+      
+      
+        
+      
+   
+
+  <div class="carousel-item active fullscreen" style=" background-color: #666;background-image: url(&#39;http://localhost:1313/media/coders.jpg&#39;); background-repeat: no-repeat; background-position: center; background-size: cover; ">
+    <div class="position-absolute d-flex w-100 h-100 justify-content-center align-items-center" style="-webkit-backdrop-filter: brightness(0.7); backdrop-filter: brightness(0.7);">
+      
+      <div class="wg-hero dark container" style="margin-left: 6rem; margin-right: 6rem; text-align: center;">
+          <h1 class="hero-title ">
+            馃憢 Welcome to the group
+          </h1>
+
+          
+          <p class="hero-lead" style="margin: 0 auto 0 auto;">
+            Take a look at what we&rsquo;re working on&hellip;
+          </p>
+          
+
+          
+        </div>
